@@ -1,0 +1,29 @@
+<html lang="en">
+    <head>
+        <title>Aplicatie</title>
+    </head>
+    <body>
+        <nav>
+            <div>
+                {% if request.user.is_authenticated %}
+                    <a href="{% url 'aplicatie1:home' %}">Lista locatii</a>
+                    <a href="{% url 'aplicatie1:adaugare' %}">Adauga locatie</a>
+                    <a href="{% url 'aplicatie2:listare' %}">Lista companii</a>
+                    {% if request.user.first_name and request.user.last_name %}
+                        <a href="{% url 'userprofile:modificare_profil' request.user.id %}">{{ request.user.first_name }} {{ request.user.last_name }}</a>
+                        {% else %}
+                        <a href="{% url 'userprofile:modificare_profil' request.user.id %}">{{ request.user.username }}</a>
+                    {% endif %}
+                    <a href="{% url 'logout' %}">Log out</a>
+                {% endif %}
+                {% if request.user.is_authenticated is False %}
+                    <a href="{% url 'userprofile:adaugare_utilizator' %}">New Account</a>
+                {% endif %}
+            </div>
+        </nav>
+        <div>
+            {% block content %}
+            {% endblock %}
+        </div>
+    </body>
+</html>

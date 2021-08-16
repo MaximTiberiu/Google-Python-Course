@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+    <p>Lista locatii curente:</p>
+    <table>
+        <thead>
+            <tr>
+                <th>Counter</th>
+                <th>City</th>
+                <th>Country</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in location_list %}
+                <tr>
+                    <td> {{ forloop.counter }} </td>
+                    <td> {{ item.city }} </td>
+                    <td> {{ item.country }} </td>
+                    <td> <a href="{% url 'aplicatie1:modificare' item.id %}">Modifica</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
